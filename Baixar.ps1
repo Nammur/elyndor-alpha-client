@@ -39,6 +39,19 @@ if($verified.Count -gt 1 -or $verified[0] -ne $zip) {
 # Windows 10/11 includes tar.exe, which supports ZIP64 and large cooked packages.
 & tar.exe -xf $zip -C $install
 if($LASTEXITCODE -ne 0) {throw 'Falha ao extrair o pacote.'}
+# Configuracao publica do servidor: busca a versao mais recente no GitHub e usa a copia local do ZIP como alternativa.
+$configUrl='https://raw.githubusercontent.com/Nammur/elyndor-alpha-client/main/servidor.json'
+try {
+    $raw=(Invoke-WebRequest -UseBasicParsing -Uri $configUrl -Headers @{'User-Agent'='ElyndorAlphaInstaller'}).Content
+} catch {
+    $local=Join-Path $PSScriptRoot 'servidor.json'
+    if(-not(Test-Path -LiteralPath $local)) {throw 'Nao foi possivel obter servidor.json.'}
+    $raw=Get-Content -Raw -LiteralPath $local
+}
+if($raw -is [byte[]]) {$raw=[Text.Encoding]::UTF8.GetString($raw)}
+$server=$raw | ConvertFrom-Json
+if(-not $server.Url -or -not $server.GameServer -or $server.CertificateSha256 -notmatch '^[A-Fa-f0-9]{64}$') {throw 'servidor.json invalido.'}
+[IO.File]::WriteAllText((Join-Path $install 'servidor.json'),$raw)
 Write-Host ('Instalado em: '+$install)
-Write-Host 'Coloque servidor.json nesta pasta e abra Iniciar.bat quando o anfitriao liberar o servidor.'
+Write-Host 'Configuracao do servidor aplicada. Abra Iniciar.bat e entre com a conta fornecida pelo anfitriao.'
 Start-Process -FilePath explorer.exe -ArgumentList ('"'+$install+'"')

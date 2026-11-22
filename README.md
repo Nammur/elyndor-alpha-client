@@ -26,7 +26,7 @@ Nao e necessario instalar Unreal Engine, MySQL, .NET ou programa de tunel/VPN: o
 | Servico | Endereco |
 |---|---|
 | Mundo | `147.185.221.217:57687` (UDP) |
-| Login | `https://bore.pub:32159` (TCP, TLS com certificado fixado) |
+| Login | `https://bore.pub:5337` (TCP, TLS com certificado fixado) |
 
 As conexoes sao somente de saida. Os jogadores nao precisam abrir portas no roteador.
 

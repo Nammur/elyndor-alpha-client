@@ -1,23 +1,26 @@
 # Elyndor — alpha para Windows
 
-Cliente para Windows 10/11 x64. Este repositorio publico distribui somente o jogo empacotado e as instrucoes para os jogadores.
+Cliente para Windows 10/11 x64. Este repositorio publico distribui somente o launcher, o jogo empacotado (em Releases) e as instrucoes para os jogadores.
 
-**O servidor ainda esta em preparacao no notebook Linux.** O anfitriao fornecera o arquivo `servidor.json` e uma conta quando a conexao estiver pronta.
+**O servidor ainda esta em preparacao no notebook Linux.** O anfitriao fornecera o arquivo `servidor.json` quando a conexao estiver pronta.
 
-## Baixar e instalar
+## Baixar, instalar e jogar
 
-1. Baixe este pequeno repositorio em **Code → Download ZIP** e extraia.
-2. Abra **Baixar.bat**. Ele baixa a versao alpha mais recente, confere o SHA-256 e extrai o jogo em `Jogos/ElyndorAlpha` dentro da sua pasta de usuario.
-3. Coloque o `servidor.json` recebido do anfitriao na pasta indicada pelo instalador, ao lado de **Iniciar.bat**.
-4. Abra **Iniciar.bat** e entre com a conta fornecida pelo anfitriao.
+1. Baixe o **[ElyndorLauncher.exe](https://github.com/Nammur/elyndor-alpha-client/releases/latest/download/ElyndorLauncher.exe)** (menos de 1 MB) e abra.
+2. Clique em **Baixar**. O launcher baixa a versao mais recente, confere o SHA-256 de cada parte e instala em `Games/ElyndorAlpha` dentro da sua pasta de usuario. Da para **Pausar** e **Retomar** sem perder o que ja baixou, inclusive depois de fechar o launcher.
+3. Quando sair uma versao nova, o botao vira **Atualizar**. O `servidor.json` vai junto para a nova versao.
+4. Na primeira vez, clique em **Servidor: escolher servidor.json** e escolha o arquivo recebido do anfitriao.
+5. Entre com seu e-mail e senha (ou **Criar conta**) e clique em **Jogar**. O jogo abre direto na tela de carregamento do mundo.
 
-Tambem e possivel baixar manualmente em [Releases](https://github.com/Nammur/elyndor-alpha-client/releases). Se o ZIP estiver dividido em partes, use o instalador para reuni-las. Nao abra uma parte isolada como ZIP.
+O jogo so abre pelo launcher. A senha fica no launcher: o jogo recebe apenas uma entrada temporaria de uso unico.
+
+O Windows pode mostrar o aviso do SmartScreen na primeira vez, porque o launcher ainda nao tem assinatura digital. Confira se o arquivo veio deste repositorio e clique em **Mais informacoes → Executar assim mesmo**.
 
 ## Primeiro acesso
 
-Se faltarem componentes Visual C++, execute `Windows/Engine/Extras/Redist/en-us/UEPrereqSetup_x64.exe` dentro da pasta extraida. O jogo precisa de placa de video compativel com os recursos do Unreal Engine 5; desempenho e requisitos serao avaliados neste alpha.
+Se faltarem componentes Visual C++, execute `Windows/Engine/Extras/Redist/en-us/UEPrereqSetup_x64.exe` dentro da pasta da versao instalada (botao **Abrir pasta do jogo**). O jogo precisa de placa de video compativel com os recursos do Unreal Engine 5; desempenho e requisitos serao avaliados neste alpha.
 
-Nao e necessario instalar Unreal Engine, MySQL ou .NET. O auxiliar de login necessario vem no pacote. Uma nova configuracao de IP/dominio pode ser entregue como `servidor.json`, sem baixar o jogo outra vez.
+Nao e necessario instalar Unreal Engine, MySQL ou .NET: o launcher usa o .NET Framework 4.8 que ja vem no Windows 10/11.
 
 O jogo conecta ao servidor em **7777/UDP** e ao login HTTPS em **17890/TCP**. Os jogadores nao precisam abrir portas de entrada no roteador.
 
